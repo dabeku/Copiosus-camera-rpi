@@ -1,2 +1,2 @@
 def debug(msg):
-    print(msg + "\n")
+    print(msg)

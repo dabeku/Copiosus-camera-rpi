@@ -9,7 +9,8 @@ import log
 log.debug("Starting...")
 
 def handler(signum, frame):
-    log.debug("STOP IT ---")
+    log.debug("Stopping...")
+    network.server_close()
     exit(1)
 
 pid = 0
