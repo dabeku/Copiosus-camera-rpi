@@ -1,5 +1,9 @@
 ## Streams the camera to Copiosus-viewer
 
+```
+python3 main.py
+```
+
 This script is intened to work on Bullseye OS of RPi.
 
 It will call

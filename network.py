@@ -9,10 +9,18 @@ PORT_LISTEN_COMMAND_TCP = 6090
 
 s = None
 
+def get_hostname():
+    return socket.gethostname()
+
+def get_state():
+    return "IDLE"
+
 def server_close():
+    log.debug("Closing socket")
     s.close()
 
 def receive_tcp():
+    global s
     s = socket.socket()
     log.debug("Socket successfully created")
     
@@ -38,9 +46,19 @@ def receive_tcp():
         buffer = c.recv(BUFFER_SIZE)
         cmd = buffer.decode('utf-8')
         log.debug("Received: " + cmd)
-    
-        # send a thank you message to the client.
-        c.send(b"Thank you for connecting")
+
+        if (cmd == "SCAN"):
+            hostname = get_hostname()
+            sender_id = "1234567"
+            state = get_state()
+            width = "640"
+            height = "480"
+            has_video = "1"
+            has_audio = "0"
+            c.send(bytes("SCAN " + hostname + " " + sender_id + " " + state + " " + width + " " + height + " " + has_video + " " + has_audio, 'utf-8'))
+        else:
+            # send a thank you message to the client.
+            c.send(b"Thank you for connecting")
     
         log.debug("Close the connection")
         # Close the connection with the client

@@ -7,6 +7,7 @@ import network
 import log
 
 log.debug("Starting...")
+log.debug("Hostname: " + network.get_hostname())
 
 def handler(signum, frame):
     log.debug("Stopping...")
